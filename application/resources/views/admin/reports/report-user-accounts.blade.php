@@ -10,7 +10,7 @@
     <div class="container-fluid">
         <div class="row">
             <h2 class="page-title">{{ __("User Accounts Report") }}
-                <a href="{{ url('export/report/accounts') }}" class="ui basic button mini offsettop5 btn-export float-right"><i class="ui icon download"></i>{{ __("Export to CSV") }}</a>
+                <a href="{{ url('export/report/accounts') }}" class="ui basic button mini offsettop5 btn-export float-right"><i class="ui icon download"></i>{{ __("Export to Excel") }}</a>
                 <a href="{{ url('reports') }}" class="ui basic blue button mini offsettop5 float-right"><i class="ui icon chevron left"></i>{{ __("Return") }}</a>
             </h2> 
         </div>
