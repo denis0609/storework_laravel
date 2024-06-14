@@ -5,6 +5,11 @@
     <div class="container-fluid">
         <div class="fixedcenter">
             <div class="clockwrapper">
+                <div class="timetype">
+                    <button class="btnTimeType worktime active" data-type="worktime">{{ __("Working Time") }}</button>
+                    <button class="btnTimeType breaktime" data-type="breaktime">{{ __("Break Time") }}</button>
+                    <button class="btnTimeType launchtime" data-type="launchtime">{{ __("Launch Time") }}</button>
+                </div>
                 <div class="clockinout">
                     <button class="btnclock timein active" data-type="timein">{{ __("Time In") }}</button>
                     <button class="btnclock timeout" data-type="timeout">{{ __("Time Out") }}</button>
@@ -98,10 +103,23 @@
         $(this).toggleClass('active animated fadeIn');
     });
 
+    $('.btnTimeType').click(function(event) {
+        var is_comment = $(this).data("type");
+        if (is_comment == "worktime") {
+            $('.comment').slideDown('200').show();
+        } else {
+            $('.comment').slideUp('200');
+        }
+        $('input[name="idno"]').focus();
+        $('.btnTimeType').removeClass('active animated fadeIn')
+        $(this).toggleClass('active animated fadeIn');
+    });
+
     $("#rfid").on("input", function() {
-        var url, type, idno, comment;
+        var url, type, idno, comment, timetype;
         url = $("#_url").val();
         type = $('.btnclock.active').data("type");
+        timetype = $('.btnTimeType.active').data("type");
         idno = $('input[name="idno"]').val();
         idno.toUpperCase();
         comment = $('textarea[name="comment"]').val();
@@ -109,8 +127,7 @@
         setTimeout(() => {
             $(this).val("");
         }, 600);
-
-        $.ajax({ url: url + '/attendance/add', type: 'post', dataType: 'json', data: {idno: idno, type: type, clockin_comment: comment}, headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
+        $.ajax({ url: url + '/attendance/add', type: 'post', dataType: 'json', data: {idno: idno, type: type, clockin_comment: comment, timetype:timetype}, headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
 
             success: function(response) {
                 if(response['error'] != null) 
@@ -147,12 +164,13 @@
         var url, type, idno, comment;
         url = $("#_url").val();
         type = $('.btnclock.active').data("type");
+        timetype = $('.btnTimeType.active').data("type");
         idno = $('input[name="idno"]').val();
         idno.toUpperCase();
         comment = $('textarea[name="comment"]').val();
 
         $.ajax({
-            url: url + '/attendance/add',type: 'post',dataType: 'json',data: {idno: idno, type: type, clockin_comment: comment},headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
+            url: url + '/attendance/add',type: 'post',dataType: 'json',data: {idno: idno, type: type, clockin_comment: comment, timetype:timetype},headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
 
             success: function(response) {
                 if(response['error'] != null) 
@@ -181,7 +199,10 @@
                     $('#time').html('<span id=clocktime>' + response['time'] + '</span>' + '.' + '<span id=clockstatus> {{ __("Success!") }}</span>');
                     $('.message-after').slideToggle().slideDown('400');
                 }
-            }
+            },
+            // error:function(response){
+            //     console.log(response);
+            // }
         });
         $('input[name="idno"]').val("");
     });

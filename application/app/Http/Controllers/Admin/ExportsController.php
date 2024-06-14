@@ -154,7 +154,7 @@ class ExportsController extends Controller
 			$query->whereBetween('date', [$datefrom, $dateto]);
 		}
 
-		$data = $query->get();
+		$data = $query->get(['date', 'employee', 'timein', 'timeout', 'breaktimein', 'breaktimeout', 'launchtimein', 'launchtimeout', 'totalhours']);
 
 		if ($data->isEmpty()) {
 			return redirect('reports/employee-attendance')->with('error', trans("Invalid request! Please select an employee or choose a date range"));
@@ -162,7 +162,7 @@ class ExportsController extends Controller
 
 		$fileName = 'attendance-reports-' . date('Y-m-d') . 'T' . date('h-i-sa') . '.xlsx';
 
-		return Excel::download(new AttendanceExport($query), $fileName);
+		return Excel::download(new AttendanceExport($data), $fileName);
 	}
 
 	function leavesReport(Request $request)

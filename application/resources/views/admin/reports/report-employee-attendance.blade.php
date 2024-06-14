@@ -58,6 +58,10 @@
                                 <th>{{ __("Employee Name") }}</th>
                                 <th>{{ __("Time In") }}</th>
                                 <th>{{ __("Time Out") }}</th>
+                                <th>{{ __("Break Time In") }}</th>
+                                <th>{{ __("Break Time Out") }}</th>
+                                <th>{{ __("Launch Time In") }}</th>
+                                <th>{{ __("Launch Time Out") }}</th>
                                 <th>{{ __("Total Hours") }}</th>
                             </tr>
                         </thead>
@@ -85,6 +89,50 @@
                                                 echo e(date('h:i:s A', strtotime($v->timeout)));
                                             } else {
                                                 echo e(date('H:i:s', strtotime($v->timeout)));
+                                            }
+                                        }
+                                    @endphp
+                                </td>
+                                <td>
+                                    @php
+                                        if($v->breaktimein != null) {
+                                            if($tf == 1) {
+                                                echo e(date('h:i:s A', strtotime($v->breaktimein)));
+                                            } else {
+                                                echo e(date('H:i:s', strtotime($v->breaktimein)));
+                                            }
+                                        }
+                                    @endphp
+                                </td>
+                                <td>
+                                    @php
+                                        if($v->breaktimeout != null) {
+                                            if($tf == 1) {
+                                                echo e(date('h:i:s A', strtotime($v->breaktimeout)));
+                                            } else {
+                                                echo e(date('H:i:s', strtotime($v->breaktimeout)));
+                                            }
+                                        }
+                                    @endphp
+                                </td>
+                                <td>
+                                    @php
+                                        if($v->launchtimein != null) {
+                                            if($tf == 1) {
+                                                echo e(date('h:i:s A', strtotime($v->launchtimein)));
+                                            } else {
+                                                echo e(date('H:i:s', strtotime($v->launchtimein)));
+                                            }
+                                        }
+                                    @endphp
+                                </td>
+                                <td>
+                                    @php
+                                        if($v->launchtimeout != null) {
+                                            if($tf == 1) {
+                                                echo e(date('h:i:s A', strtotime($v->launchtimeout)));
+                                            } else {
+                                                echo e(date('H:i:s', strtotime($v->launchtimeout)));
                                             }
                                         }
                                     @endphp

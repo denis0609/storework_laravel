@@ -20,25 +20,21 @@ class AttendanceExport implements FromCollection, WithHeadings, ShouldAutoSize, 
 
     public function collection()
     {
-        return $this->query->get();
+        return $this->query;
     }
 
     public function headings(): array
     {
         return [
-            'ID',
-            'REFERENCE',
-            'IDNO',
-            'DATE',
-            'EMPLOYEE',
-            'TIME IN',
-            'TIME OUT',
-            'TOTAL HOURS',
-            'STATUS-IN',
-            'STATUS-OUT',
-            "REASON",
-            "COMMENT",
-            "CREATED_AT"
+            'Date',
+            'Employee Name',
+            'Time In',
+            'Time Out',
+            'Break Time In',
+            'Break Time Out',
+            'Launch Time In',
+            'Launch Time Out',
+            'Total Hours'
         ];
     }
     

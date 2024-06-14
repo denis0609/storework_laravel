@@ -52,6 +52,10 @@
                                 <th>{{ __('Employee') }}</th>
                                 <th>{{ __('Time In') }}</th>
                                 <th>{{ __('Time Out') }}</th>
+                                <th>{{ __('Break Time In') }}</th>
+                                <th>{{ __('Break Time Out') }}</th>
+                                <th>{{ __('Launch Time In') }}</th>
+                                <th>{{ __('Launch Time Out') }}</th>
                                 <th>{{ __('Total Hours') }}</th>
                                 <th>{{ __('Status (In/Out)') }}</th>
                                 @isset($s)
@@ -59,6 +63,7 @@
                                         <th>Comment</th>
                                     @endif
                                 @endisset
+                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -84,6 +89,50 @@
                                                 echo e(date('h:i:s A', strtotime($d->timeout)));
                                             } else {
                                                 echo e(date('H:i:s', strtotime($d->timeout)));
+                                            }
+                                        @endphp
+                                    @endisset
+                                </td>
+                                <td>
+                                    @isset($d->breaktimein)
+                                        @php 
+                                            if($s->time_format == 1) {
+                                                echo e(date('h:i:s A', strtotime($d->breaktimein)));
+                                            } else {
+                                                echo e(date('H:i:s', strtotime($d->breaktimein)));
+                                            }
+                                        @endphp
+                                    @endisset
+                                </td>
+                                <td>
+                                    @isset($d->breaktimeout)
+                                        @php 
+                                            if($s->time_format == 1) {
+                                                echo e(date('h:i:s A', strtotime($d->breaktimeout)));
+                                            } else {
+                                                echo e(date('H:i:s', strtotime($d->breaktimeout)));
+                                            }
+                                        @endphp
+                                    @endisset
+                                </td>
+                                <td>
+                                    @isset($d->launchtimein)
+                                        @php 
+                                            if($s->time_format == 1) {
+                                                echo e(date('h:i:s A', strtotime($d->launchtimein)));
+                                            } else {
+                                                echo e(date('H:i:s', strtotime($d->launchtimein)));
+                                            }
+                                        @endphp
+                                    @endisset
+                                </td>
+                                <td>
+                                    @isset($d->launchtimeout)
+                                        @php 
+                                            if($s->time_format == 1) {
+                                                echo e(date('h:i:s A', strtotime($d->launchtimeout)));
+                                            } else {
+                                                echo e(date('H:i:s', strtotime($d->launchtimeout)));
                                             }
                                         @endphp
                                     @endisset
